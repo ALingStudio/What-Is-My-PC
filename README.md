@@ -74,7 +74,3 @@ bash build/sign.sh       # 代码签名（当前未启用，按脚本注释配�
 ├── third_party/sys          # golang.org/x/sys 本地镜像（离线构建用）
 └── dist/WhatIsMyPC.exe      # 交付产物
 ```
-
----
-
-内容由 AI 生成
