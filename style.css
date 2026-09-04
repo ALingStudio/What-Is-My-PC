@@ -1,0 +1,344 @@
+/* ═══════════════════════════════════════════
+   What Is My PC — 官网落地页
+   功能主义 / 极简：深空灰 · 纯白 · 科技蓝
+═══════════════════════════════════════════ */
+
+:root {
+  --ink: #2C2C2C;
+  --white: #FFFFFF;
+  --bg-soft: #F3F4F6;
+  --gray: #6B7280;
+  --line: #E5E7EB;
+  --accent: #2563EB;
+  --accent-hover: #1D4ED8;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+  --maxw: 1200px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ── 按钮 ── */
+
+.btn {
+  display: inline-block;
+  padding: 14px 42px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .18s, transform .18s;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--white);
+}
+.btn-primary:hover { background: var(--accent-hover); }
+
+.btn-light {
+  background: var(--white);
+  color: var(--ink);
+}
+.btn-light:hover { background: var(--bg-soft); }
+
+/* ══════════ 1. 首屏 ══════════ */
+
+.hero {
+  background: var(--white);
+  padding: 110px 0 90px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.hero-title {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.15;
+}
+
+.hero-sub {
+  margin-top: 14px;
+  font-size: 21px;
+  font-weight: 400;
+  color: var(--gray);
+}
+
+.hero-points {
+  list-style: none;
+  margin: 34px 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.hero-points li {
+  font-size: 16px;
+  color: var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.tick {
+  color: var(--accent);
+  font-weight: 700;
+  flex: none;
+}
+
+.hero-meta {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--gray);
+}
+
+.shot {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .07), 0 24px 60px rgba(0, 0, 0, .13);
+  border: 1px solid var(--line);
+}
+
+.shot-hero { transform: rotate(.6deg); }
+
+/* ══════════ 2. 功能特性 ══════════ */
+
+.features {
+  background: var(--bg-soft);
+  padding: 96px 0;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+.feature-icon {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 22px;
+}
+.feature-icon svg { width: 26px; height: 26px; }
+
+.feature-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.feature-desc {
+  font-size: 14.5px;
+  color: var(--gray);
+  line-height: 1.85;
+}
+
+/* ══════════ 3. 软件截图 ══════════ */
+
+.screens {
+  background: var(--white);
+  padding: 96px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--gray);
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.carousel {
+  margin-top: 52px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 10px 4px 26px;
+  flex: 1;
+  scrollbar-width: none;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.screen-card {
+  flex: 0 0 min(560px, 78%);
+  scroll-snap-align: center;
+}
+
+.screen-card img {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .06), 0 18px 44px rgba(0, 0, 0, .1);
+}
+
+.screen-card figcaption {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+.carousel-btn {
+  flex: none;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+  z-index: 2;
+}
+.carousel-btn svg { width: 20px; height: 20px; }
+.carousel-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ══════════ 4. 下载与更新日志 ══════════ */
+
+.download {
+  background: var(--ink);
+  color: var(--white);
+  padding: 96px 0;
+}
+
+.download-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.download-title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+}
+
+.download-desc {
+  margin: 14px 0 32px;
+  color: #B9BDC4;
+  font-size: 15.5px;
+}
+
+.download-meta {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #9CA3AF;
+}
+
+.changelog-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--white);
+}
+
+.changelog {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.changelog li {
+  position: relative;
+  padding-left: 22px;
+  color: #D1D5DB;
+  font-size: 14.5px;
+}
+
+.changelog li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .58em;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ══════════ 5. 页脚 ══════════ */
+
+.footer {
+  background: #000;
+  color: var(--gray);
+  padding: 42px 0;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.copyright { font-size: 13.5px; }
+
+.footer-links {
+  display: flex;
+  gap: 28px;
+}
+
+.footer-links a {
+  color: var(--gray);
+  text-decoration: none;
+  font-size: 13.5px;
+  transition: color .15s;
+}
+.footer-links a:hover { color: var(--white); }
+
+/* ══════════ 响应式 ══════════ */
+
+@media (max-width: 900px) {
+  .hero { padding: 72px 0 60px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 44px; }
+  .hero-title { font-size: 42px; }
+  .features-grid { grid-template-columns: 1fr; gap: 40px; }
+  .features, .screens, .download { padding: 64px 0; }
+  .download-grid { grid-template-columns: 1fr; gap: 52px; }
+  .carousel-btn { display: none; }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
