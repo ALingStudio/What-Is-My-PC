@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Is My PC</title>
+<link rel="stylesheet" href="css/win11.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ═══════════ 左侧导航 ═══════════ -->
+  <nav id="nav">
+    <div class="nav-logo">
+      <div class="logo-badge">?</div>
+      <div class="logo-text">
+        <div class="logo-name">What Is My PC</div>
+        <div class="logo-sub">ALing Studios</div>
+      </div>
+    </div>
+
+    <div class="nav-items">
+      <a class="nav-item active" data-page="config" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M9 20h6M12 16v4"/></svg>
+        <span>电脑配置</span>
+      </a>
+      <a class="nav-item" data-page="perf" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 4 12L16 9l1.5 3H21"/></svg>
+        <span>实时占用</span>
+      </a>
+      <a class="nav-item" data-page="bench" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5a8 8 0 1 1 15 0"/><path d="M12 13.5 15.5 9"/><circle cx="12" cy="14.5" r="1.6"/></svg>
+        <span>跑分测试</span>
+      </a>
+      <a class="nav-item" data-page="about" href="javascript:void(0)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
+        <span>关于软件</span>
+      </a>
+    </div>
+
+    <div class="nav-footer" id="nav-version">V0.1b</div>
+  </nav>
+
+  <!-- ═══════════ 内容区 ═══════════ -->
+  <main id="content">
+
+    <!-- ── 页面 1：电脑配置 ── -->
+    <section id="page-config" class="page active">
+      <div id="config-loading" class="state-block">
+        <div class="spinner"></div>
+        <p>正在读取电脑配置…</p>
+      </div>
+
+      <div id="config-body" class="hidden">
+        <div class="pc-name-card">
+          <div class="pc-name" id="pc-name">—</div>
+          <div class="pc-name-sub" id="pc-name-sub">—</div>
+        </div>
+
+        <div class="config-area">
+          <div class="config-grid" id="config-grid"><!-- JS 渲染配件卡片 --></div>
+
+          <div id="official-panel" class="official-panel hidden">
+            <div class="official-head">
+              <span class="official-tag">官网信息</span>
+              <span class="official-target" id="official-target"></span>
+              <button class="icon-btn" id="official-close" title="关闭">✕</button>
+            </div>
+            <div id="official-body" class="official-body"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="config-error" class="state-block hidden">
+        <p class="err-text">配置读取失败</p>
+        <button class="btn" id="config-retry">重试</button>
+      </div>
+    </section>
+
+    <!-- ── 页面 2：实时占用 ── -->
+    <section id="page-perf" class="page">
+      <div class="perf-head">
+        <h2 class="page-title">实时占用</h2>
+        <div class="perf-status" id="perf-status">正在采样…</div>
+      </div>
+
+      <div id="perf-loading" class="state-block">
+        <div class="spinner"></div>
+        <p>正在采集性能数据…</p>
+      </div>
+
+      <div id="perf-grid" class="perf-grid hidden"><!-- JS 渲染资源卡片 --></div>
+    </section>
+
+    <!-- ── 页面 3：跑分测试 ── -->
+    <section id="page-bench" class="page">
+      <div class="bench-frame" id="bench-frame">
+        <div class="bench-head">
+          <div class="bench-title" id="bench-title">让我测试你的电脑性能！</div>
+          <div class="bench-total hidden" id="bench-total">
+            <span class="bench-total-num" id="bench-total-num">0</span>
+            <span class="bench-total-label">总分</span>
+          </div>
+        </div>
+
+        <div class="bench-list" id="bench-list"><!-- JS 渲染测试项 --></div>
+
+        <div class="bench-actions">
+          <button class="btn btn-primary btn-big" id="bench-start">开始测试</button>
+          <div class="bench-hint" id="bench-hint">全程约 1~2 分钟，请保持电脑处于空闲状态以获得准确分数</div>
+        </div>
+
+        <!-- 完成态：穿透大框的评级圆 -->
+        <div class="bench-circle hidden" id="bench-circle">
+          <div class="bench-grade" id="bench-grade">A</div>
+          <div class="bench-grade-sub" id="bench-grade-sub">评级</div>
+        </div>
+
+        <!-- 完成态：右下角分享按钮 -->
+        <div class="share-chip hidden" id="share-chip" data-tip="与你的朋友分享你的分数！">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.6"/><circle cx="17.5" cy="6" r="2.6"/><circle cx="17.5" cy="18" r="2.6"/><path d="M8.4 10.8 15.2 7.2M8.4 13.2l6.8 3.6"/></svg>
+          <span>分享</span>
+        </div>
+      </div>
+
+      <div class="bench-history" id="bench-history"></div>
+    </section>
+
+    <!-- ── 页面 4：关于软件 ── -->
+    <section id="page-about" class="page">
+      <div class="about-card">
+        <div class="about-logo">?</div>
+        <h1 class="about-name">What Is My PC</h1>
+        <p class="about-tagline">看看你的电脑，到底是一台什么水平的机器</p>
+
+        <div class="about-rows">
+          <div class="about-row"><span class="about-key">作者</span><span class="about-val" id="about-author">ALing Studios</span></div>
+          <div class="about-row"><span class="about-key">软件版本</span><span class="about-val" id="about-version">V0.1b</span></div>
+          <div class="about-row"><span class="about-key">构建日期</span><span class="about-val" id="about-builddate">—</span></div>
+          <div class="about-row"><span class="about-key">备注</span><span class="about-val" id="about-note">本软件由AI辅助完成</span></div>
+        </div>
+
+        <div class="about-foot" id="about-foot"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- 分享图弹窗 -->
+<div class="modal-mask hidden" id="share-modal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <span>分享你的分数</span>
+      <button class="icon-btn" id="share-close">✕</button>
+    </div>
+    <div class="modal-body">
+      <canvas id="share-canvas" width="1280" height="720"></canvas>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-primary" id="share-save">保存分享图</button>
+    </div>
+  </div>
+</div>
+
+<!-- 首次启动：免责声明与隐私条款 -->
+<div class="consent-mask hidden" id="consent-mask">
+  <div class="consent-card">
+    <div class="consent-head">
+      <div class="consent-logo">?</div>
+      <div>
+        <div class="consent-title">用户协议与免责声明</div>
+        <div class="consent-sub">What Is My PC · 请在继续使用前阅读以下条款</div>
+      </div>
+    </div>
+
+    <div class="consent-body">
+      <h4>一、免责声明</h4>
+      <p>本软件按"现状"提供，用于展示电脑硬件信息、实时占用情况并提供娱乐性质的跑分测试。跑分过程会使 CPU、内存、磁盘与显卡短时间处于高负载状态，请确保设备散热正常。因使用本软件产生的任何直接或间接损失，开发者不承担责任。</p>
+
+      <h4>二、知识产权与反拆包条款</h4>
+      <p>本软件（包括但不限于程序、界面、图标与文案）著作权归 <b>ALing Studios</b> 所有。<b>严禁对本软件进行恶意拆包、反编译、破解或二次打包分发</b>；此类行为违反本协议及相关法律法规，开发者保留依法追究法律责任（包括提起诉讼）的权利。</p>
+
+      <h4>三、AI 功能与数据处理</h4>
+      <p>本软件的"官网信息"功能使用 <b>Agnes 2.5 flash</b> AI 模型。使用该功能时，你点击的硬件型号文本将发送至 Agnes 进行生成处理，<b>数据由 Agnes 处理</b>，处理规则详见：</p>
+      <p><a class="consent-link" href="javascript:void(0)" data-url="https://www.agnes-ai.com/zh-Hans/docs/privacy-policy">《Agnes 隐私条款》</a></p>
+
+      <h4>四、本机数据</h4>
+      <p>硬件信息读取自你的系统，跑分历史仅保存在本机（C:\ProgramData\WhatIsMyPC），不会上传至任何第三方服务器。</p>
+    </div>
+
+    <div class="consent-foot">
+      <button class="btn" id="consent-decline">不同意并退出</button>
+      <button class="btn btn-primary" id="consent-accept">我已阅读并同意</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-wrap"></div>
+
+<script src="js/main.js"></script>
+<script src="js/gputest.js"></script>
+<script src="js/pages/config.js"></script>
+<script src="js/pages/perf.js"></script>
+<script src="js/pages/bench.js"></script>
+<script src="js/pages/about.js"></script>
+<script src="js/share.js"></script>
+<script>App.init();</script>
+</body>
+</html>
